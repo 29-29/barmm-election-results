@@ -27,6 +27,7 @@
     "@quasar/extras": "^2.1.0",
     "apexcharts": "^7.3.0",
     "approve": "^0.0.12",
+    "axios": "^1.20.0",
     "install-scripts": "^1.2.0",
     "pinia": "^4.0.2",
     "quasar": "^2.32.3",

@@ -42,6 +42,7 @@ import MunicipalitySelect from '@/components/municipalitySelect.vue';
 import PrecinctSelect from '@/components/precinctSelect.vue';
 import ProvinceSelect from '@/components/provinceSelect.vue';
 import { Contest, Result } from '@/types/result';
+import { apiFetch } from '@/utils/api';
 import { ApexOptions } from 'apexcharts';
 import { QCard, QCardSection, QSpinner } from 'quasar';
 import { computed, nextTick, onMounted, reactive, ref } from 'vue';
@@ -86,7 +87,7 @@ const sectoralContests = computed<Contest[]>(() => {
 const fetchResults = async() => {
   let level = form.province ? (form.municipality ? (form.barangay ? (form.precinct ? 'precinct' : 'barangay') : 'municipality') : 'province') : 'region'
 
-  const query = `/api/results?level=${level}&` +
+  const query = `results?level=${level}&` +
   (level == 'region'
     ? `reg=BARMM`
     : level == 'province'
@@ -99,14 +100,14 @@ const fetchResults = async() => {
     ? `vc=${encodePlus(form.precinct ?? '')}` : ''
   )
 
-  const response = await fetch(query)
-  results.value = await response.json()
+  const response = await apiFetch(query)
+  results.value = response
 }
 
 const encodePlus = (s:string) => encodeURIComponent(s).replace(/%20/g, '+')
 
 const fetchVoterDistrib = async (level: string, form: {province: string|null, municipality: string|null, barangay: string|null}) => {
-  let query = `/api/results?level`
+  let query = `results?level`
   let subUnits = []
 
   // level determination
@@ -146,8 +147,8 @@ const fetchVoterDistrib = async (level: string, form: {province: string|null, mu
   const voters = Promise.all(
     subUnits.map(async (u: string) => {
       try {
-        const response = await fetch(`${query}=${queryLevel}&${specifier}&${identifier}=${encodePlus(u)}`)
-        const data = (await response.json()) as Result
+        const response = await apiFetch(`${query}=${queryLevel}&${specifier}&${identifier}=${encodePlus(u)}`)
+        const data = response
 
         return {
           name: u,

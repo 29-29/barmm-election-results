@@ -11,7 +11,7 @@ export default defineConfig((ctx) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['apexcharts'],
+    boot: ['apexcharts', 'axios'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: ["app.scss"],
@@ -48,12 +48,10 @@ export default defineConfig((ctx) => {
       vueRouterMode: "hash", // available values: 'hash', 'history'
       // vueRouterBase,
 
-      publicPath: process.env.NODE_ENV === 'production' ? '/barmm-election-results' : '/',
-      defineEnv: {
-        API_URL: ctx.dev
-          ? '/api'
-          : 'https://results.ppcrv.org/api'
-      }
+      publicPath: process.env.NODE_ENV === 'production' ? '/barmm-election-results/' : '/',
+      // rawDefine: {
+      //   'process.env.API_URL': JSON.stringify('https://results.ppcrv.org/api')
+      // }
       // define: {},
       // defineEnv: {}
       // ignorePublicFolder: true,
