@@ -151,7 +151,7 @@ const legislativeContests = computed<Contest[]>(() => {
         case 'SEVENTH PARLIAMENTARY DISTRICT':
           district = '7th District'
           break
-        case 'EIGTHT PARLIAMENTARY DISTRICT':
+        case 'EIGHTH PARLIAMENTARY DISTRICT':
           district = '8th District'
           break
         case 'NINTH PARLIAMENTARY DISTRICT':

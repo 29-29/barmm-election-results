@@ -25,7 +25,8 @@ const partyColors = {
   'MORO AKO': '#705507',
   'BEST PARTY': '#a87731',
   'BEST': '#a87731',
-  'BPP': '#278b33'
+  'BPP': '#278b33',
+  'MUSHAWARA': '#933314'
 }
 
 const getPartyColor = (key: string | undefined): string => {
