@@ -58,6 +58,20 @@ export default defineConfig((ctx) => {
       // minify: false,
       // distDir
 
+      vitePlugins: [
+        {
+          name: 'inject-csp-meta',
+          transformIndexHtml(html) {
+            const cspContent = ctx.dev
+              ? "default-src 'self'; connect-src 'self' ws://localhost:* https://corsproxy.io https://*.ppcrv.org; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+              : "default-src 'self'; connect-src 'self' https://corsproxy.io https://*.ppcrv.org; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+
+            const cspMetaTag = `<meta http-equiv="Content-Security-Policy" content="${cspContent}">`;
+
+            return html.replace('</head>', `  ${cspMetaTag}\n</head>`);
+          }
+        }
+      ]
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
 
