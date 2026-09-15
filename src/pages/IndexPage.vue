@@ -34,8 +34,8 @@
     <!-- LEGISLATIVE CONTESTS -->
 
     <q-card flat bordered>
-      <q-card-section class="q-gutter-y-sm">
-        <div class="text-h5">LEGISLATIVE DISTRICT REPRESENTATIVE</div>
+      <q-card-section>
+        <div class="text-h5 q-mb-sm">LEGISLATIVE DISTRICT REPRESENTATIVE</div>
         <div class="row q-col-gutter-md">
           <div class="col-3" v-for="district in legislativeContests" >
             <contest-pie-chart :contest="district" :options="{legend: {show: false}}" />
