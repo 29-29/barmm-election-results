@@ -20,7 +20,8 @@
     "dev": "quasar dev",
     "build": "quasar build",
     "typecheck": "vue-tsc --noEmit",
-    "postinstall": "quasar prepare --silent"
+    "postinstall": "quasar prepare --silent",
+    "publish": "gh-pages -d dist/spa"
   },
   "dependencies": {
     "@quasar/extras": "^2.1.0",
@@ -37,6 +38,7 @@
     "@quasar/app-vite": "^3.8.4",
     "@types/node": "^22.19.11",
     "autoprefixer": "^10.4.27",
+    "gh-pages": "^6.3.0",
     "oxfmt": "^0.x",
     "oxlint": "^1.x",
     "oxlint-tsgolint": "^7.0.2001",

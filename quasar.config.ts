@@ -3,7 +3,7 @@
 
 import { defineConfig } from "#q-app";
 
-export default defineConfig((/* ctx */) => {
+export default defineConfig((ctx) => {
   return {
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
@@ -45,10 +45,15 @@ export default defineConfig((/* ctx */) => {
       // https://v2.quasar.dev/quasar-cli-vite/page-routing-with-vue-router#filename-based-routing
       // filenameBasedRouting: true,
 
-      vueRouterMode: "hash" // available values: 'hash', 'history'
+      vueRouterMode: "hash", // available values: 'hash', 'history'
       // vueRouterBase,
 
-      // publicPath: '/',
+      publicPath: process.env.NODE_ENV === 'production' ? '/barmm-election-results' : '/',
+      defineEnv: {
+        API_URL: ctx.dev
+          ? '/api'
+          : 'https://results.ppcrv.org/api'
+      }
       // define: {},
       // defineEnv: {}
       // ignorePublicFolder: true,
