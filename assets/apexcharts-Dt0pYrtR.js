@@ -1,0 +1,1 @@
+import{n as e}from"./index-BN-isKEW.js";import{t}from"./vue3-apexcharts-Ds47Qm4a.js";var n=e(({app:e})=>{e.use(t)});export{n as default};
