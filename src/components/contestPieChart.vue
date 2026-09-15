@@ -16,12 +16,16 @@ const partyColors = {
   'UBJP': '#2a7115',
   'BFP': '#2a4383',
   'BGC': '#fac82a',
+  'SIAP': '#fac82a',
   'MAHARDIKA': '#9ca3af',
   'RAAYAT DEMOCRATIC PARTY': '#43de79',
   'BAPA': '#ff0000',
   'PRO BANGSAMORO PARTY': '#3a9f5b',
+  'PRO BM': '#3a9f5b',
   'MORO AKO': '#705507',
-  'BEST PARTY': '#a87731'
+  'BEST PARTY': '#a87731',
+  'BEST': '#a87731',
+  'BPP': '#278b33'
 }
 
 const getPartyColor = (key: string | undefined): string => {

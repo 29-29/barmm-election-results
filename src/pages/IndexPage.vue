@@ -20,6 +20,8 @@
       <contest-pie-chart :contest="contests[0] ?? null" :options="{legend: {position: 'bottom'}}" class="col" />
     </div>
 
+    <!-- CONTESTS -->
+
     <q-card flat bordered>
       <q-card-section class="q-gutter-y-sm">
         <div class="text-h5">PARLIAMENTARY SECTORAL REPRESENTATIVE</div>
@@ -29,7 +31,18 @@
       </q-card-section>
     </q-card>
 
-    <!-- CONTESTS -->
+    <!-- LEGISLATIVE CONTESTS -->
+
+    <q-card flat bordered>
+      <q-card-section class="q-gutter-y-sm">
+        <div class="text-h5">LEGISLATIVE DISTRICT REPRESENTATIVE</div>
+        <div class="row q-col-gutter-md">
+          <div class="col-3" v-for="district in legislativeContests" >
+            <contest-pie-chart :contest="district" :options="{legend: {show: false}}" />
+          </div>
+        </div>
+      </q-card-section>
+    </q-card>
 
   </q-page>
 </template>
@@ -79,6 +92,74 @@ const sectoralContests = computed<Contest[]>(() => {
         break
       case "PARLIAMENTARY SECTORAL REPRESENTATIVE FOR THE TRADITIONAL LEADERS of BARMM":
         c.name = "Traditional Leaders"
+    }
+  })
+  return initialContests
+})
+
+const legislativeContests = computed<Contest[]>(() => {
+  let initialContests = contests.value.filter(x => x.category == 'LEGISLATIVE DISTRICT REPRESENTATIVE') ?? []
+  const regex = /\s+-\s+([^-]+?|.+?)\s+-\s+(.+)$/
+  initialContests.forEach(c => {
+    const match = c.name.match(regex)
+    if (match) {
+      let province = match[1]?.trim()
+      switch (province) {
+        case 'BASILAN':
+          province = 'Basilan'
+          break
+        case 'LANAO DEL SUR':
+          province = 'Lanao del Sur'
+          break
+        case 'TAWI-TAWI':
+          province = 'Tawi-Tawi'
+          break
+        case 'MAGUINDANAO DEL NORTE':
+          province = 'Maguindanao del Norte'
+          break
+        case 'MAGUINDANAO DEL SUR':
+          province = 'Maguindanao del Sur'
+          break
+        case 'CITY OF COTABATO':
+          province = 'City of Cotabato'
+          break
+        case 'SPECIAL GEOGRAPHIC AREA':
+          province = 'Special Geographic Area (SGA)'
+          break
+      }
+
+      let district = match[2]?.trim()
+      switch (district) {
+        case 'FIRST PARLIAMENTARY DISTRICT':
+          district = '1st District'
+          break
+        case 'SECOND PARLIAMENTARY DISTRICT':
+          district = '2nd District'
+          break
+        case 'THIRD PARLIAMENTARY DISTRICT':
+          district = '3rd District'
+          break
+        case 'FOURTH PARLIAMENTARY DISTRICT':
+          district = '4th District'
+          break
+        case 'FIFTH PARLIAMENTARY DISTRICT':
+          district = '5th District'
+          break
+        case 'SIXTH PARLIAMENTARY DISTRICT':
+          district = '6th District'
+          break
+        case 'SEVENTH PARLIAMENTARY DISTRICT':
+          district = '7th District'
+          break
+        case 'EIGTHT PARLIAMENTARY DISTRICT':
+          district = '8th District'
+          break
+        case 'NINTH PARLIAMENTARY DISTRICT':
+          district = '9th District'
+          break
+      }
+
+      c.name = `${province} ${district}`
     }
   })
   return initialContests
@@ -170,7 +251,6 @@ const options = ref<ApexOptions>({
   labels: [],
   plotOptions: {
     pie: {
-      // borderRadius: 25,
       donut: {
         labels: {
           show: true,
